@@ -1,0 +1,26 @@
+[global]
+output = results.json.log
+# stores matches in JSON here
+
+log_path = zoidbergstrike.log
+# Sets the log_path for the logging file
+
+log_level = INFO
+# Sets the log level for the logging
+# Possible values: INFO, ERROR, DEBUG
+# set to DEBUG if you are interested in seeing what comes back from nmap raw, warning is loud!
+
+nse_script = grab_beacon_config.nse
+# path to the nse script that rips down cobalt configs. This is specifically using https://github.com/whickey-r7/grab_beacon_config
+
+searches = search.yml
+# contains the different searches to run on each internet scanning service provider (eg shodan, zoomeye, security trails) when hunting for team servers.
+
+shodan_token = TOKENHERE
+# shodan token for searching
+
+zoomeye_token = TOKENHERE
+# zoomeye token for searching
+
+securitytrails_token = TOKENHERE
+# security trails token for searching

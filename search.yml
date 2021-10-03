@@ -1,0 +1,9 @@
+shodan:
+  - 'ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1'
+  - 'ssl.jarm:07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175'
+  - 'ssl.jarm:2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53'
+  - 'ssl.cert.serial:146473198'
+securitytrails:
+  - 'SELECT address, ports.port FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1"'
+  - 'SELECT address, ports.port FROM ips WHERE jarm = "07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175"'
+  - 'SELECT address, ports.port FROM ips WHERE jarm = "2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53"'
