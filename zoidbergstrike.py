@@ -97,7 +97,7 @@ if __name__ == "__main__":
     log.info("INIT - zoidbergstrike v" + str(VERSION))
 
     if ARG_VERSION:
-        log.info("version: {0}".format(VERSION))
+        log.info("Version: {0}".format(VERSION))
         sys.exit(0)
 
     NMAP_PATH = nmap.check(log)
@@ -109,7 +109,6 @@ if __name__ == "__main__":
         cobalt_ips = []
         abs_path = os.path.abspath(SEARCH_YML)
         searches = read_searches(abs_path)
-        print(searches)
         cobalt_ips = mine_cobalt(searches, config, log)
     else:
         abs_path = os.path.abspath(INPUT_PATH)

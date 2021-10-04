@@ -4,7 +4,7 @@ def setup_logging(LOG_PATH,LOG_LEVEL):
     """Creates a shared logging object for the application"""
 
     # create logging object
-    logger = logging.getLogger('cobalt-pickaxe')
+    logger = logging.getLogger('zoidbergstrike')
     logger.setLevel(LOG_LEVEL)
     # create a file and console handler
     fh = logging.FileHandler(LOG_PATH)
@@ -21,5 +21,5 @@ def setup_logging(LOG_PATH,LOG_LEVEL):
     return logger
 
 def get():
-    logger = logging.getLogger('cobalt-pickaxe')
+    logger = logging.getLogger('zoidbergstrike')
     return logger

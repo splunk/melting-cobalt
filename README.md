@@ -24,7 +24,7 @@ Requirements: `virtualenv`, and `python3.8+`
 
 Continue to [configuring](#configuration) for SecurityTrails, Shodan, or ZoomEye API key.
 
-### Configuration [`zoidbergstrike.conf`](https://github.com/d1vious/zoidbergstrike/blob/master/zoidbergstrike.conf.example)
+## Configuration [`zoidbergstrike.conf`](https://github.com/d1vious/zoidbergstrike/blob/master/zoidbergstrike.conf.example)
 
 Copy `zoidbergstrike.conf.example` to `zoidbergstrike.conf`!
 
@@ -106,7 +106,7 @@ optional arguments:
                         newline delimeted file of cobalt strike server ips to grab beacon configs from. example ips.txt
 ```
 
-### Search Examples
+## Search Examples
 
 The following searches are provided out of the box and more may be added to [`search.yml`](https://github.com/d1vious/zoidbergstrike/blob/main/search.yml) for more data.
 
@@ -115,10 +115,13 @@ The following searches are provided out of the box and more may be added to [`se
 ##### Find specific [JARM](https://blog.cobaltstrike.com/2020/12/08/a-red-teamer-plays-with-jarm/) signatures, out of the box we track Cobalt Strike 4.x
 `'ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1'`
 
+##### Filter by HTTP headers and ports to reduce noisy results
+`'ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1 port:"22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050" HTTP/1.1 404 Not Found Content-Length: 0'`
+
 ##### Team server detected by Shodan
 `'product:"cobalt strike team server"'`
 
-_note_: will generate alot of noisy results
+_note_: will generate lots of noisy results, do not actually schedule this unless you want to burn your license credits.
 
 ##### Team server certificate serial
 `'ssl.cert.serial:146473198'`
@@ -128,17 +131,42 @@ _note_: will generate alot of noisy results
 ##### Find specific [JARM](https://blog.cobaltstrike.com/2020/12/08/a-red-teamer-plays-with-jarm/) signatures
 `'SELECT address, ports.port FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1"'`
 
-# Author
+##### Filter by HTTP Headers and ports to reduce noisy nmap_results
+`'SELECT address, ports.port, isp.name_normalized, ports.port, address, asn.number, jarm, http.headers.raw FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1" OR jarm = "07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175" OR jarm = "2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53" AND http.headers.content_type = "text/plain" AND http.headers.raw = "content-length:0" AND ports.port IN (22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050)'`
+
+## Author
 
 * Michael Haag [@M_haggis](https://twitter.com/M_haggis)
 * Jose Hernandez [@d1vious](https://twitter.com/d1vious)
 
-# Credits & References
+## Support 📞
+Please use the [GitHub issue tracker](https://github.com/splunk/attack_range/issues) to submit bugs or request features.
+
+If you have questions or need support, you can:
+
+* Join the [#security-research](https://splunk-usergroups.slack.com/archives/C1S5BEF38) room in the [Splunk Slack channel](http://splunk-usergroups.slack.com)
+
+## Credits & References
 
 Inspiration came from a handful of blogs:
 Much of this is only possible because whiskey-7 shared with us grab_beacon_config.nse
 
-# TODO
+## TODO
 - [ ] add zoomeye
 - [ ] Dedup results before nmap
-- [ ] add checking for latest updated
+- [ ] add checking the most recent result by looking at the latest_updated field
+
+## License
+Copyright 2020 Splunk Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

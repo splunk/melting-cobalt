@@ -1,9 +1,20 @@
 shodan:
-  - 'ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1'
-  - 'ssl.jarm:07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175'
-  - 'ssl.jarm:2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53'
+  # Ref: https://sergiusechel.medium.com/improving-the-network-based-detection-of-cobalt-strike-c2-servers-in-the-wild-while-reducing-the-6964205f6468
+  # 3 known bad jarms for Cobalt Strike. 1 ssl cert known bad for cobalt strike.
+  - 'ssl.jarm:07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1 port:"22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050" HTTP/1.1 404 Not Found Content-Length: 0'
+  - 'ssl.jarm:07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175 port:"22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050" HTTP/1.1 404 Not Found Content-Length: 0'
+  - 'ssl.jarm:2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53 port:"22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050" HTTP/1.1 404 Not Found Content-Length: 0'
   - 'ssl.cert.serial:146473198'
 securitytrails:
-  - 'SELECT address, ports.port FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1"'
-  - 'SELECT address, ports.port FROM ips WHERE jarm = "07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175"'
-  - 'SELECT address, ports.port FROM ips WHERE jarm = "2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53"'
+  # Ref: https://sergiusechel.medium.com/improving-the-network-based-detection-of-cobalt-strike-c2-servers-in-the-wild-while-reducing-the-6964205f6468
+  # Identifies 3 high fidelity jarm’s that identify cobalt strike team servers with http headers and commonly used ports.
+  - 'SELECT address, ports.port, isp.name_normalized, ports.port, address, asn.number, jarm, http.headers.raw FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1" OR jarm = "07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175" OR jarm = "2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53" AND http.headers.content_type = "text/plain" AND http.headers.raw = "content-length:0" AND ports.port IN (22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050)'
+  # Ref: https://sergiusechel.medium.com/improving-the-network-based-detection-of-cobalt-strike-c2-servers-in-the-wild-while-reducing-the-6964205f6468
+  # Identifies 3 high fidelity jarm’s that identify cobalt strike team servers with http headers and commonly used ports. This is specific to “server:Microsoft-IIS8.5”.
+  - 'SELECT address, ports.port, isp.name_normalized, ports.port, address, http.headers.raw, asn.number FROM ips WHERE jarm = "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1" OR jarm = "07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175" OR jarm = "2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53" AND ports.port = "443" OR ports.port = "80" AND http.headers.content_type = "text/plain" AND http.headers.raw = "server:Microsoft-IIS/8.5" AND http.headers.raw = "content-length:0"'
+  # The following uses commonly used ports and fuzzy matching with IIS. In addition we scope the http headers to content length 0 and text/plain.
+  - 'SELECT address, ports.port, isp.name_normalized, ports.port, address, asn.number, http.headers.server, http.headers.content_type, http.headers.raw FROM ips WHERE http.headers.content_type = "text/plain" AND http.headers.raw LIKE "server:Microsoft-IIS/%" AND http.headers.raw = "content-length:0" AND ports.port IN (22, 80, 443, 444, 1234, 2000, 2222, 3000, 3780, 4000, 4443, 6379, 7443, 8443, 8080, 8081, 8082, 8087, 8088, 8099, 8089, 8090, 8181, 8888, 8889, 9443, 50050)'
+  # This query is looking only for 3 items in HTTP that are semi-loose but suspicious. No results with ST due to http.title.
+  - 'SELECT http.title, http.headers.server, http.headers.content_type, http.headers.raw FROM hosts WHERE http.title = "HTTP/1.1 404 Not Found" AND http.headers.content_type = "text/plain" AND http.headers.raw = "content-length:0"'
+  # One off IPs query
+  - 'SELECT address, ports.port, http.title, isp.name_normalized, ports.port, address, asn.number, http.headers.raw, dns.reverse, egress.hotness, egress.is_egress, jarm FROM ips WHERE address = "162.33.177.113"'
