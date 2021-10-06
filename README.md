@@ -17,16 +17,16 @@ their beacon configuration for later indexing. Hunts can either be expansive and
 
 Requirements: `virtualenv`, and `python3.8+`
 
-1. `git clone https://github.com/d1vious/zoidbergstrike && cd zoidbergstrike` Clone project and cd into the project dir.
+1. `git clone https://github.com/splunk/zoidbergstrike && cd zoidbergstrike` Clone project and cd into the project dir.
 2. `pip install virtualenv && virtualenv -p python3 venv && source venv/bin/activate && pip install -r requirements.txt` Create Virtualenv and install requirements.
 
 Continue to [configuring](#configuration) for SecurityTrails, Shodan, or ZoomEye API key.
 
-## Configuration [`zoidbergstrike.conf`](https://github.com/d1vious/zoidbergstrike/blob/master/zoidbergstrike.conf.example)
+## Configuration [`zoidbergstrike.conf`](https://github.com/splunk/zoidbergstrike/blob/master/zoidbergstrike.conf.example)
 
 Copy `zoidbergstrike.conf.example` to `zoidbergstrike.conf`!
 
-Make sure to set a token for one of the available [providers](https://github.com/d1vious/zoidbergstrike/blob/main/zoidbergstrike.conf.example#L18-L25). If you need to create one for your account follow [these](htt://need wiki page) instructions.
+Make sure to set a token for one of the available [providers](https://github.com/splunk/zoidbergstrike/blob/main/zoidbergstrike.conf.example#L18-L25). If you need to create one for your account follow [these](htt://need wiki page) instructions.
 
 Configuration example:
 
@@ -106,7 +106,7 @@ optional arguments:
 
 ## Search Examples
 
-The following searches are provided out of the box and more may be added to [`search.yml`](https://github.com/d1vious/zoidbergstrike/blob/main/search.yml) for more data.
+The following searches are provided out of the box and more may be added to [`search.yml`](https://github.com/splunk/zoidbergstrike/blob/main/search.yml) for more data.
 
 #### Shodan
 
@@ -138,7 +138,7 @@ _note_: will generate lots of noisy results, do not actually schedule this unles
 * Jose Hernandez [@d1vious](https://twitter.com/d1vious)
 
 ## Support 📞
-Please use the [GitHub issue tracker](https://github.com/splunk/attack_range/issues) to submit bugs or request features.
+Please use the [GitHub issue tracker](https://github.com/splunk/zoidbergstrike/issues) to submit bugs or request features.
 
 If you have questions or need support, you can:
 
