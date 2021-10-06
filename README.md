@@ -2,8 +2,6 @@
 A tool to hunt/mine for Cobalt Strike beacons and "reduce"
 their beacon configuration for later indexing. Hunts can either be expansive and internet wide using services like SecurityTrails, Shodan, or ZoomEye or a list of IP's.
 
-![](static/logo.png)
-
 ## Getting started
 
 1. [Install](#installation) ZoidbergStrike
