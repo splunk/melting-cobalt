@@ -1,10 +1,10 @@
-# zoidbergstrike 👀
+# melting-cobalt 👀
 A tool to hunt/mine for Cobalt Strike beacons and "reduce"
 their beacon configuration for later indexing. Hunts can either be expansive and internet wide using services like SecurityTrails, Shodan, or ZoomEye or a list of IP's.
 
 ## Getting started
 
-1. [Install](#installation) ZoidbergStrike
+1. [Install](#installation) melting-cobalt
 2. [Configure](#configuration) your tokens to begin the hunt
 3. [Mine](#search-examples) Beacons to begin reducing them
 4. Review results `cat results.json | jq`
@@ -17,16 +17,16 @@ their beacon configuration for later indexing. Hunts can either be expansive and
 
 Requirements: `virtualenv`, and `python3.8+`
 
-1. `git clone https://github.com/splunk/zoidbergstrike && cd zoidbergstrike` Clone project and cd into the project dir.
+1. `git clone https://github.com/splunk/melting-cobalt && cd melting-cobalt` Clone project and cd into the project dir.
 2. `pip install virtualenv && virtualenv -p python3 venv && source venv/bin/activate && pip install -r requirements.txt` Create Virtualenv and install requirements.
 
 Continue to [configuring](#configuration) for SecurityTrails, Shodan, or ZoomEye API key.
 
-## Configuration [`zoidbergstrike.conf`](https://github.com/splunk/zoidbergstrike/blob/master/zoidbergstrike.conf.example)
+## Configuration [`melting-cobalt.conf`](https://github.com/splunk/melting-cobalt/blob/master/melting-cobalt.conf.example)
 
-Copy `zoidbergstrike.conf.example` to `zoidbergstrike.conf`!
+Copy `melting-cobalt.conf.example` to `melting-cobalt.conf`!
 
-Make sure to set a token for one of the available [providers](https://github.com/splunk/zoidbergstrike/blob/main/zoidbergstrike.conf.example#L18-L25). If you need to create one for your account follow [these](htt://need wiki page) instructions.
+Make sure to set a token for one of the available [providers](https://github.com/splunk/melting-cobalt/blob/main/melting-cobalt.conf.example#L18-L25). If you need to create one for your account follow [these](htt://need wiki page) instructions.
 
 Configuration example:
 
@@ -35,7 +35,7 @@ Configuration example:
 output = results.json
 # stores matches in JSON here
 
-log_path = zoidbergstrike.log
+log_path = melting-cobalt.log
 # Sets the log_path for the logging file
 
 log_level = INFO
@@ -60,11 +60,11 @@ securitytrails_token = TOKENHERE
 
 ### Search The Internet
 
-To modify the default mining performed across different providers, customize `search.yml`. The default ZoidbergStrike [Search Examples](#search-examples) below.
+To modify the default mining performed across different providers, customize `search.yml`. The default melting-cobalt [Search Examples](#search-examples) below.
 
 Run:
 
-`python zoidbergstrike.py`
+`python melting-cobalt.py`
 
 ### Search IP list
 populate `ips.txt` with potential Cobalt Strike C2 IPs a new line delimeted, example:
@@ -77,7 +77,7 @@ populate `ips.txt` with potential Cobalt Strike C2 IPs a new line delimeted, exa
 
 Run:
 
-`python zoidbergstrike.py -i ips.txt`
+`python melting-cobalt.py -i ips.txt`
 
 If you need inspiration from hunters we highly recommend:
 
@@ -88,7 +88,7 @@ If you need inspiration from hunters we highly recommend:
 ## Usage
 
 ```
-usage: zoidbergstrike.py [-h] [-c CONFIG] [-o OUTPUT] [-v] [-i INPUT]
+usage: melting-cobalt.py [-h] [-c CONFIG] [-o OUTPUT] [-v] [-i INPUT]
 
 scans for open cobalt strike team servers and grabs their beacon configs and write this as a json log to be analyzed by any analytic tools
 like splunk, elastic, etc..
@@ -99,14 +99,14 @@ optional arguments:
                         config file path
   -o OUTPUT, --output OUTPUT
                         file to write to the results, defaults to results.json.log
-  -v, --version         shows current zoidbergstrike version
+  -v, --version         shows current melting-cobalt version
   -i INPUT, --input INPUT
                         newline delimeted file of cobalt strike server ips to grab beacon configs from. example ips.txt
 ```
 
 ## Search Examples
 
-The following searches are provided out of the box and more may be added to [`search.yml`](https://github.com/splunk/zoidbergstrike/blob/main/search.yml) for more data.
+The following searches are provided out of the box and more may be added to [`search.yml`](https://github.com/splunk/melting-cobalt/blob/main/search.yml) for more data.
 
 #### Shodan
 
@@ -138,7 +138,7 @@ _note_: will generate lots of noisy results, do not actually schedule this unles
 * Jose Hernandez [@d1vious](https://twitter.com/d1vious)
 
 ## Support 📞
-Please use the [GitHub issue tracker](https://github.com/splunk/zoidbergstrike/issues) to submit bugs or request features.
+Please use the [GitHub issue tracker](https://github.com/splunk/melting-cobalt/issues) to submit bugs or request features.
 
 If you have questions or need support, you can:
 
