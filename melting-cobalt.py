@@ -70,8 +70,8 @@ if __name__ == "__main__":
 
     # grab arguments
     parser = argparse.ArgumentParser(description="Scans for publicly accessible Cobalt Strike Team Servers and grabs the beacon configuration and writes it out as a json log to be analyzed by any analytic tools like Splunk, Elastic, and so forth.")
-    parser.add_argument("-c", "--config", required=False, default="zoidbergstrike.conf", help="Path to configuration file. Default: zoidbergstrike.conf")
-    parser.add_argument("-v", "--version", default=False, action="store_true", required=False, help="Shows current zoidbergstrike version")
+    parser.add_argument("-c", "--config", required=False, default="melting-cobalt.conf", help="Path to configuration file. Default: melting-cobalt.conf")
+    parser.add_argument("-v", "--version", default=False, action="store_true", required=False, help="Shows current melting-cobalt version")
     parser.add_argument("-i", "--input", required=False, default = "", help="Newline delimeted file of potential Cobalt Strike Team Servers IP's to grab beacon configurations from. Example - ips.txt")
 
     # parse them
@@ -83,10 +83,10 @@ if __name__ == "__main__":
     # needs config parser here
     tool_config = Path(config)
     if tool_config.is_file():
-        print("zoidbergstrike is using config at path {0}".format(tool_config))
+        print("melting-cobalt is using config at path {0}".format(tool_config))
         configpath = str(tool_config)
     else:
-        print("ERROR: zoidbergstrike failed to find a config file at {0}..exiting".format(tool_config))
+        print("ERROR: melting-cobalt failed to find a config file at {0}..exiting".format(tool_config))
         sys.exit(1)
 
     # Parse config
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     config = parser.load_conf(configpath)
 
     log = logger.setup_logging(config['log_path'], config['log_level'])
-    log.info("INIT - zoidbergstrike v" + str(VERSION))
+    log.info("INIT - melting-cobalt v" + str(VERSION))
 
     if ARG_VERSION:
         log.info("Version: {0}".format(VERSION))
