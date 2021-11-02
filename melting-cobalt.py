@@ -62,7 +62,7 @@ import sys
 import time
 from pathlib import Path
 from modules.CustomConfigParser import CustomConfigParser
-from modules import logger, shodan, nmap, securitytrails
+from modules import logger, shodan, nmap, securitytrails, zoomeye
 
 
 VERSION = 1
@@ -115,6 +115,13 @@ def mine_cobalt(search, config, log):
                 cobalt_ips.append(ip)
             # sleep 1 second to not hit securitytrails api rate limit
             time.sleep(1)
+    if 'zoomeye' in search:
+        for s in search['zoomeye']:
+            log.info("Gathering all IPs from Zoomeye using search: {}".format(s))
+            results = zoomeye.search(s, config['zoomeye_token'], log)
+            log.info("Identified {} matching instances".format(len(results)))
+            for ip in results:
+                cobalt_ips.append(ip)
     log.info("Cobalt Strike Team Servers found: {}".format(len(cobalt_ips)))
     return cobalt_ips
 
