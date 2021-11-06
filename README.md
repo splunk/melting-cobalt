@@ -146,9 +146,9 @@ If you have questions or need support, you can:
 
 ## Credits & References
 
-Inspiration came from a handful of blogs:
-Much of this is only possible because whiskey-7 shared with us grab_beacon_config.nse
-[Aan](https://twitter.com/petruknisme) For Contributing the ZoomEye integration!
+* Inspiration came from a handful of blogs:https://michaelkoczwara.medium.com/cobalt-strike-c2-hunting-with-shodan-c448d501a6e2, https://sergiusechel.medium.com/improving-the-network-based-detection-of-cobalt-strike-c2-servers-in-the-wild-while-reducing-the-6964205f6468
+* Much of this is only possible because whickey-r7 shared with us [grab_beacon_config.nse](https://github.com/whickey-r7/grab_beacon_config)
+* [Aan](https://twitter.com/petruknisme) For Contributing the ZoomEye integration!
 
 ## TODO
 - [ ] Dedup results before nmap
