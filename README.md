@@ -148,9 +148,9 @@ If you have questions or need support, you can:
 
 Inspiration came from a handful of blogs:
 Much of this is only possible because whiskey-7 shared with us grab_beacon_config.nse
+[Aan](https://twitter.com/petruknisme) For Contributing the ZoomEye integration!
 
 ## TODO
-- [ ] add zoomeye
 - [ ] Dedup results before nmap
 - [ ] add checking the most recent result by looking at the latest_updated field
 
