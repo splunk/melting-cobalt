@@ -11,7 +11,7 @@ their beacon configuration for later indexing. Hunts can either be expansive and
 
 :tv: **Demo**
 
-![](static/demo.gif)
+[![Melting-Cobalt Demo](https://img.youtube.com/vi/IBwwFUwFkU4/3.jpg)](https://www.youtube.com/watch?v=IBwwFUwFkU4)
 
 ## Installation
 
