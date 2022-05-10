@@ -2,7 +2,7 @@
 output = results.json.log
 # stores matches in JSON here
 
-log_path = zoidbergstrike.log
+log_path = melting-cobalt.log
 # Sets the log_path for the logging file
 
 log_level = INFO
