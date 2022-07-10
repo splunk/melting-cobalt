@@ -99,14 +99,14 @@ def read_searches(SEARCH_YML):
 
 def mine_cobalt(search, config, log):
     cobalt_ips = []
-    if 'shodan' in search:
+    if 'shodan' in search and not (config['shodan_token'] == "TOKENHERE" or config['shodan_token'] == ""):
         for s in search['shodan']:
             log.info("Gathering all IPs from Shodan using search: {}".format(s))
             results = shodan.search(s, config['shodan_token'], log)
             log.info("Identified {} matching instances".format(len(results)))
             for ip in results:
                 cobalt_ips.append(ip)
-    if 'securitytrails' in search:
+    if 'securitytrails' in search and not (config['securitytrails_token'] == "TOKENHERE" or config['zoomeye_token'] == ""):
         for s in search['securitytrails']:
             log.info("Gathering all IPs from SecurityTrails using search: {}".format(s))
             results = securitytrails.search(s, config['securitytrails_token'], log)
@@ -115,7 +115,7 @@ def mine_cobalt(search, config, log):
                 cobalt_ips.append(ip)
             # sleep 1 second to not hit securitytrails api rate limit
             time.sleep(1)
-    if 'zoomeye' in search:
+    if 'zoomeye' in search and not (config['zoomeye_token'] == "TOKENHERE" or config['zoomeye_token'] == ""):
         for s in search['zoomeye']:
             log.info("Gathering all IPs from Zoomeye using search: {}".format(s))
             results = zoomeye.search(s, config['zoomeye_token'], log)
