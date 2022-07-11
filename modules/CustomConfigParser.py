@@ -20,4 +20,12 @@ class CustomConfigParser:
                     print("ERROR - with configuration file at {0} failed with error {1}".format(CONFIG_PATH, e))
                     sys.exit(1)
 
+        # set empty tokens if one is not found on the config
+        if 'shodan_token' not in self.settings:
+            self.settings['shodan_token'] = ''
+        if 'securitytrails_token' not in self.settings:
+            self.settings['securitytrails_token'] = ''
+        if 'zoomeye_token' not in self.settings:
+            self.settings['zoomeye_token'] = ''
+        
         return self.settings

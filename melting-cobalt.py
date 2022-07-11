@@ -72,7 +72,7 @@ def write_results(OUTPUT_FILE, results, log):
     try:
         with open(OUTPUT_FILE, 'a') as outfile:
             json.dump(results, outfile)
-        log.info("Wrote {0} beacon data to result file: {0}".format(len(results),OUTPUT_FILE))
+        log.info("Wrote {0} beacons to result file: {1}".format(len(results),OUTPUT_FILE))
     except Exection as e:
         log.error("Writing result file: {0}".format(str(e)))
 
@@ -106,7 +106,7 @@ def mine_cobalt(search, config, log):
             log.info("Identified {} matching instances".format(len(results)))
             for ip in results:
                 cobalt_ips.append(ip)
-    if 'securitytrails' in search and not (config['securitytrails_token'] == "TOKENHERE" or config['zoomeye_token'] == ""):
+    if 'securitytrails' in search and not (config['securitytrails_token'] == "TOKENHERE" or config['securitytrails_token'] == ""):
         for s in search['securitytrails']:
             log.info("Gathering all IPs from SecurityTrails using search: {}".format(s))
             results = securitytrails.search(s, config['securitytrails_token'], log)
