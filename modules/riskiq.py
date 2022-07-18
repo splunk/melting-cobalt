@@ -43,7 +43,7 @@ def search(search, API_KEY, userName, log):
 
         # now paginate through the rest
 
-        for page_number in range(1, total_results):
+        for page_number in range(0, total_results):
             if page_number != 0:
 
                 log.info("Processing page: {0} out of {1}".format(page_number,total_pages))
