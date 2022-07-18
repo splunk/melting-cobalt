@@ -16,11 +16,17 @@ nse_script = grab_beacon_config.nse
 searches = search.yml
 # contains the different searches to run on each internet scanning service provider (eg shodan, zoomeye, security trails) when hunting for team servers.
 
-shodan_token = TOKENHERE
+shodan_token = TOKEN_HERE 
 # shodan token for searching
 
-zoomeye_token = TOKENHERE
+zoomeye_token = TOKEN_HERE 
 # zoomeye token for searching
 
-securitytrails_token = TOKENHERE
+securitytrails_token = TOKEN_HERE 
 # security trails token for searching
+
+riskiq_token = TOKEN_HERE 
+# riskiq token for searching
+
+riskiq_username = USER@NAME.HERE
+# riskiq username for searching

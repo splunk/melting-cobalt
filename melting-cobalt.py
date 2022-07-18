@@ -62,7 +62,7 @@ import sys
 import time
 from pathlib import Path
 from modules.CustomConfigParser import CustomConfigParser
-from modules import logger, shodan, nmap, securitytrails, zoomeye
+from modules import logger, shodan, nmap, securitytrails, zoomeye, riskiq
 
 
 VERSION = 1
@@ -72,8 +72,8 @@ def write_results(OUTPUT_FILE, results, log):
     try:
         with open(OUTPUT_FILE, 'a') as outfile:
             json.dump(results, outfile)
-        log.info("Wrote {0} beacons to result file: {1}".format(len(results),OUTPUT_FILE))
-    except Exection as e:
+        log.info("Wrote {0} beacon data to result file: {0}".format(len(results),OUTPUT_FILE))
+    except Exception as e:
         log.error("Writing result file: {0}".format(str(e)))
 
 def ips_from_inputfile(INPUT_FILE):
@@ -119,6 +119,13 @@ def mine_cobalt(search, config, log):
         for s in search['zoomeye']:
             log.info("Gathering all IPs from Zoomeye using search: {}".format(s))
             results = zoomeye.search(s, config['zoomeye_token'], log)
+            log.info("Identified {} matching instances".format(len(results)))
+            for ip in results:
+                cobalt_ips.append(ip)
+    if 'riskiq' in search:
+        for s in search['riskiq']:
+            log.info("Gathering all IPs from RiskIQ using search: {}".format(s))
+            results = riskiq.search(s, config['riskiq_token'], config['riskiq_username'], log)
             log.info("Identified {} matching instances".format(len(results)))
             for ip in results:
                 cobalt_ips.append(ip)
