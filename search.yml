@@ -26,3 +26,7 @@ zoomeye:
   - 'jarm:"2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53" +(port:22 port:80 port:443 port:444 port:1234 port:2000 port:2222 port:3000 port:3780 port:4000 port:4443 port:6379 port:7443 port:8443 port:8080 port:8081 port:8082 port:8087 port:8088 port:8099 port:8089 port:8090 port:8181 port:8888 port:8889 port:9443 port:50050) +headers:"HTTP/1.1" +headers:"404 Not Found" +headers:"Content-Length: 0"'
   # still don't know the equal for ssl.cert.serial in zoomeye
   #- 'ssl.cert.serial:146473198'
+riskiq:
+  - '07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1'
+  - '07d14d16d21d21d07c07d14d07d21d9b2f5869a6985368a9dec764186a9175'
+  - '2ad2ad16d2ad2ad22c42d42d00042d58c7162162b6a603d3d90a2b76865b53'
